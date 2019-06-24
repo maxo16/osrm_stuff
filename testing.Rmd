@@ -36,3 +36,14 @@ Timing!
 microbenchmark(NULL, osrmTable(test, measure = "distance"), times=10000L)
 ```
 
+Now do a test for Stockton
+SJ Delta College: 37.996592, -121.324200
+Stockton Airport: 37.896874, -121.251584
+```{r}
+test_stockton <- data.frame("id" = c(1,2), "lon" = c(-121.324200,-121.251584), "lat" =  c(37.996592,37.896874))
+```
+
+```{r}
+osrmTable(test_stockton, measure = "distance")
+```
+
