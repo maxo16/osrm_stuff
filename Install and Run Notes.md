@@ -98,6 +98,8 @@ chmod 755 install_script
 chmod 755 first_run_script
 ./first_run_script
 
+chmod 755 run_script
+./run_script
 ```
 
 
