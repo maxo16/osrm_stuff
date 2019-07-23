@@ -87,6 +87,21 @@ build/osrm-routed --algorithm=MLD berlin-latest.osrm
 
 Ubuntu password: stanfordsus
 
+The following commands clone the repo I've created then run the install and first_run scripts. The ```chmod``` commands set the permissions. Could probably do it elsewhere but this seems easy enough. You will most likely be prompted for the ubuntu password and it's listed above.  
+
+```
+git clone https://github.com/maxo16/osrm_stuff
+cd osrm_stuff
+chmod 755 install_script
+./install_script
+
+chmod 755 first_run_script
+./first_run_script
+
+```
+
+
+
 
 
 Just following the instructions found [here](https://datawookie.netlify.com/blog/2017/09/building-a-local-osrm-instance/).
