@@ -83,6 +83,8 @@ build/osrm-routed --algorithm=MLD berlin-latest.osrm
 
 ## Ubuntu
 
+Status: all of this appears to git OSRM up and running smoothly. 
+
 ### Installing
 
 Ubuntu password: stanfordsus
