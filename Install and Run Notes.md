@@ -1,8 +1,8 @@
 # Install and Run Notes
+## MacOS
 
 
-
-## Installing
+### Installing
 
 So, somehow I got it installed and I’m not really quite sure how that happened. 
 
@@ -17,7 +17,7 @@ lines and it seems to have worked. In fact, I know it works because when I go to
 
 
 
-### Install example code
+#### Install example code
 
 ```
 # from the gist
@@ -38,7 +38,7 @@ make
 
 
 
-## Running
+### Running
 
 I first tried running these commands from the [wiki](<https://github.com/Project-OSRM/osrm-backend/wiki/Running-OSRM>).
 
@@ -50,7 +50,7 @@ Simple checklist that will make sense after reading throught the code and commen
 
 
 
-### From the wiki
+#### From the wiki
 
 ```
 # This just downloads the osm file that everyone seems to use as an example. 
@@ -70,7 +70,7 @@ osrm-routed --algorithm=MLD berlin.osrm
 
 
 
-### Actual commands
+#### Actual commands
 
 ```
 # This is the terminal input with the current directory set to the osrm-backend file directly downloaded from GitHub
@@ -81,8 +81,70 @@ build/osrm-customize berlin-latest.osrm
 build/osrm-routed --algorithm=MLD berlin-latest.osrm
 ```
 
+## Ubuntu
+
+### Installing
+
+Ubuntu password: stanfordsus
+
+
+
+Just following the instructions found [here](https://datawookie.netlify.com/blog/2017/09/building-a-local-osrm-instance/).
+
+Can just copy and paste each line (may become a batch script later)
+
+```bash
+sudo apt update
+sudo apt install -y git cmake build-essential jq htop
+sudo apt install -y liblua5.2-dev libboost-all-dev libprotobuf-dev libtbb-dev libstxxl-dev libbz2-dev
+
+git clone --branch v5.18.0 https://github.com/Project-OSRM/osrm-backend.git
+
+cd osrm-backend/
+
+mkdir build
+cd build/
+cmake ..
+
+make
+
+sudo make install
+```
+
+
+
+### Downloading OSM Data
+
+Creating a map directory and changing to it to prevent clutter in the parent directory.  Run the ```wget``` function inside the map directory. 
+
+```
+mkdir map
+cd map
+
+wget -O test.osm "https://overpass-api.de/api/map?bbox=-121.5802,37.7419,-120.9698,38.1437"
+```
+
+### Creating the OSRM Object and Running
+
+Run the lines below while still in the map directory. It creates all of the needed graph objects inside the directory that the input OSM file is located. By doing this, it prevents the parent directory from getting too cluttered and makes deletion of files easy to create another graph object. Although, if you just use a different name then it's not a problem. 
+
+Imperfect explanation of what's goin on:
+
+1st line:  creating an OSRM object from the data downloaded
+
+2nd line: creating the contraction hierarchies (see the documentation on GitHub for explanation)
+
+3rd line: runs OSRM. Note, only this line has to be run in the future to get OSRM up and running. Have to be inside of the map directory to run this line as is, otherwise modify extensions as appropriate. 
+
+```
+../build/osrm-extract test.osm -p ../profiles/car.lua
+../build/osrm-contract test.osrm
+../build/osrm-routed test.osrm
+```
+
+
 
 
 #### Future things to consider
 
-* Creating the map that it uses to route creates a number of files. It actually isn't too clever but probably worth spending a minute to think about how to structure things such that it's all created in a separate file. At some point, I'm thinking this could get turned into some sort of batch script or something similar that we'd then use to automate the process. 
+* Figured out how to 
