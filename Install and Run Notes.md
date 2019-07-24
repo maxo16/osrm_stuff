@@ -84,6 +84,7 @@ build/osrm-routed --algorithm=MLD berlin-latest.osrm
 ## Ubuntu
 
 Status: all of this appears to git OSRM up and running smoothly. 
+Note that Ubuntu on Windows has to be installed. It's free and the easiest way to get it is through the Microsoft Store. You'll need to create an admin password for Ubuntu during the install process. This password is unrelated to the Windows password. 
 
 ### Installing
 
