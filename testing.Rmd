@@ -11,14 +11,31 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ```{r}
 library(osrm)
+# Timing library
 library(microbenchmark)
 ```
 
+Tells OSRMr to look for the local instance of OSRM and not the demo server. 
 ```{r}
 options(osrm.server = "http://127.0.0.1:5000/")
 ```
 
+Stockton Testing. 
 
+SJ Delta College: 37.996592, -121.324200
+Stockton Airport: 37.896874, -121.251584
+```{r}
+test_stockton <- data.frame("id" = c(1,2), "lon" = c(-121.324200,-121.251584), "lat" =  c(37.996592,37.896874))
+```
+
+```{r}
+osrmTable(test_stockton, measure = "distance")
+```
+
+
+
+
+Initial test using demo data and the Berlin map. 
 Just make a dataframe using the example
 apotheke.df[1:50, c("id","lon","lat")]
 ```{r}
@@ -36,14 +53,6 @@ Timing!
 microbenchmark(NULL, osrmTable(test, measure = "distance"), times=10000L)
 ```
 
-Now do a test for Stockton
-SJ Delta College: 37.996592, -121.324200
-Stockton Airport: 37.896874, -121.251584
-```{r}
-test_stockton <- data.frame("id" = c(1,2), "lon" = c(-121.324200,-121.251584), "lat" =  c(37.996592,37.896874))
-```
 
-```{r}
-osrmTable(test_stockton, measure = "distance")
-```
+
 
